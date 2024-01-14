@@ -1,171 +1,174 @@
 @import url('https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,100..900;1,100..900&display=swap');
 body{
- font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
  display: flex;
  align-items: center;
  justify-content: center;
+ background-color: rgb(250, 241, 230);
 }
 
-/*search bar*/
+ h1{
+font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+ }
 
-.search-panels {
-  --default-color: #9e9e9e;
-  --color-text: #ccc;
-  --color-active: #1a73e8;
-  --color-active-input: #f5f5f5;
-  --transition: 150ms cubic-bezier(0.4,0,0.2,1);
-  --width-input: 200px;
+ .header {
+     display: flex;
+     justify-content: center;
+     flex-direction: column;
+     align-items: center;
+ }
+
+.form {
+    --input-bg: #FFf;
+    /*  background of input */
+    --padding: 1.5em;
+    --rotate: 80deg;
+    /*  rotation degree of input*/
+    --gap: 2em;
+    /*  gap of items in input */
+    --icon-change-color: #084b3c;
+    /*  when rotating changed icon color */
+    --height: 50px;
+    /*  height */
+    width: 300px;
+    -webkit-padding-end: 1em;
+    padding-inline-end: 1em;
+    /*  change this for padding in the end of input */
+    background: var(--input-bg);
+    position: relative;
+    border-radius: 4px;
+    margin-top: 50px;
 }
 
-.search-group {
-  position: relative;
+.form label {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
+    height: var(--height);
 }
 
-.input {
-  width: var(--width-input);
-  border: solid 1.5px var(--default-color);
-  border-radius: 80px;
-  background: none;
-  padding: 1rem;
-  padding-right: 3rem;
-  font-size: 1rem;
-  color: var(--color-active-input);
-  transition: border var(--transition);
+.form input {
+    width: 100%;
+    -webkit-padding-start: calc(var(--padding) + var(--gap));
+    padding-inline-start: calc(var(--padding) + var(--gap));
+    outline: none;
+    background: none;
+    border: 0;
 }
 
-.enter-label {
-  position: absolute;
-  left: 15px;
-  color: var(--default-color);
-  pointer-events: none;
-  transform: translateY(1rem);
-  transition: var(--transition);
+/* style for both icons -- search,close */
+.form svg {
+    /* display: block; */
+    color: #111;
+    -webkit-transition: 0.3s cubic-bezier(.4, 0, .2, 1);
+    transition: 0.3s cubic-bezier(.4, 0, .2, 1);
+    position: absolute;
+    height: 15px;
 }
 
-.enter-label {
-  color: var(--default-color);
-  pointer-events: none;
+/* search icon */
+.icon {
+    position: absolute;
+    left: var(--padding);
+    -webkit-transition: 0.3s cubic-bezier(.4, 0, .2, 1);
+    transition: 0.3s cubic-bezier(.4, 0, .2, 1);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
 }
 
-.input:focus, input:valid {
-  outline: none;
-  border: 1.5px solid var(--color-active);
+/* arrow-icon*/
+.swap-off {
+    -webkit-transform: rotate(-80deg);
+    -ms-transform: rotate(-80deg);
+    transform: rotate(-80deg);
+    opacity: 0;
+    visibility: hidden;
 }
 
-.input:focus ~ label, input:valid ~ label {
-  transform: translateY(-50%) scale(0.8);
-  background-color: var(--color-active);
-  border-radius: 20px;
-  padding: .2em .6em;
-  color: var(--color-text);
+/* close button */
+.close-btn {
+    /* removing default bg of button */
+    background: none;
+    border: none;
+    right: calc(var(--padding) - var(--gap));
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    color: #111;
+    padding: 0.1em;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    opacity: 0;
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+    visibility: hidden;
 }
 
-.btn-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: -1em;
-  right: 80%;
-  border-radius: 100%;
-  transition: 300ms cubic-bezier(0.4,0,0.2,1);
-  transition-delay: 100ms;
-  opacity: 0;
+.form input:focus~.icon {
+    -webkit-transform: rotate(var(--rotate)) scale(1.3);
+    -ms-transform: rotate(var(--rotate)) scale(1.3);
+    transform: rotate(var(--rotate)) scale(1.3);
 }
 
-.input:focus ~ .btn-box, input:valid ~ .btn-box {
-  right: 10%;
-  opacity: 1;
-  transition-delay: 0s;
-  transition: var(--transition);
+.form input:focus~.icon .swap-off {
+    opacity: 1;
+    -webkit-transform: rotate(-80deg);
+    -ms-transform: rotate(-80deg);
+    transform: rotate(-80deg);
+    visibility: visible;
+    color: var(--icon-change-color);
 }
 
-.input:not(:focus) ~ .btn-box, input:not(:valid) ~ .btn-box {
-  transition-property: right, opacity;
-  transition-delay: 300ms;
+.form input:focus~.icon .swap-on {
+    opacity: 0;
+    visibility: visible;
 }
 
-.input:focus ~ .btn-box:hover, input:valid ~ .btn-box:hover {
-  transform: scale(1.2);
+.form input:valid~.icon {
+    -webkit-transform: scale(1.3) rotate(var(--rotate));
+    -ms-transform: scale(1.3) rotate(var(--rotate));
+    transform: scale(1.3) rotate(var(--rotate))
 }
 
-.input:focus ~ .btn-box:hover:active, input:valid ~ .btn-box:hover:active {
-  transform: scale(1);
+.form input:valid~.icon .swap-off {
+    opacity: 1;
+    visibility: visible;
+    color: var(--icon-change-color);
 }
 
-.btn-search {
-  position: relative;
-  cursor: pointer;
-  background-color: var(--color-active);
-  width: 2em;
-  height: 2em;
-  top: 2.5px;
-  border: none;
-  border-radius: 100%;
-  padding: 0;
-  transition: var(--transition);
+.form input:valid~.icon .swap-on {
+    opacity: 0;
+    visibility: visible;
 }
 
-.btn-search:active {
-  transform: scale(1);
-}
-
-.btn-search svg {
-  position: absolute;
-  top: 25%;
-  left: 25%;
-  fill: var(--color-text);
-  width: 12px;
-  height: 12px;
-}
-
-#svg-circle {
-  fill: var(--color-text);
-  transition: var(--transition);
-}
-
-.input:focus ~ .btn-box:hover #svg-circle, input:valid ~ .btn-box:hover #svg-circle {
-  fill: transparent;
-}
-
-.btn-box-x {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 1em;
-  right: 7%;
-  opacity: 0;
-  transform: rotate(-90deg) scale(.1);
-  transition: var(--transition);
-}
-
-.input:focus ~ .btn-box-x, input:valid ~ .btn-box-x {
-  opacity: 1;
-  transform: rotate(0) scale(1);
-}
-
-.btn-cleare {
-  position: relative;
-  cursor: pointer;
-  background-color: transparent;
-  width: 2em;
-  height: 2em;
-  border: none;
-  border-radius: 100%;
-  padding: 0;
-  transition: var(--transition);
-}
-
-.btn-cleare svg {
-  width: 15px;
-  height: 15px;
-}
-
-#cleare-line {
-  fill: var(--default-color);
-}
-
-.btn-box-x:hover #cleare-line {
-  fill: var(--color-active);
+.form input:valid~.close-btn {
+    opacity: 1;
+    visibility: visible;
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: 0s;
+    transition: 0s;
 }
