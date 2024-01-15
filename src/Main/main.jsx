@@ -23,7 +23,7 @@ const Main=() =>{
     return (
       <div>
         <div className="header">
-          <h1 className="text-7xl italic mt-16 text-emerald-900">Snap.</h1>
+          <h1 className="text-7xl italic mt-16 text-emerald-900">Snaps.</h1>
 
           <form className="form">
             <label htmlFor="search">
@@ -90,6 +90,13 @@ const Main=() =>{
               </button>
             </label>
           </form>
+
+          <div className="tabs grid grid-cols-4 gap-16 mt-7">
+            <div className="bg-emerald-900 text-red-100 px-5 py-1 rounded justify-center flex align-middle"><a>Mountain</a></div>
+            <div className="bg-emerald-900 text-red-100 px-5 py-1 rounded justify-center flex align-middle"><a>Beaches</a></div>
+            <div className="bg-emerald-900 text-red-100 px-5 py-1 rounded justify-center flex align-middle"><a>Food</a></div>
+            <div className="bg-emerald-900 text-red-100 px-5 py-1 rounded justify-center flex align-middle"><a>Birds</a></div>
+          </div>
         </div>
       </div>
     );
